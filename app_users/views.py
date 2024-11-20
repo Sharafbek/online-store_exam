@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
@@ -10,6 +10,14 @@ from .forms import UserRegistrationForm
 
 
 User = get_user_model()
+
+
+
+def account_func(request):
+    context = {}
+    return render(request=request,
+                  template_name='account.html',
+                  context=context)
 
 
 
