@@ -12,17 +12,15 @@ from .forms import UserRegistrationForm
 User = get_user_model()
 
 
-
 def account_func(request):
     context = {}
     return render(request=request,
-                  template_name='account.html',
+                  template_name='app_users/account.html',
                   context=context)
 
 
-
 class UserLogin(LoginView):
-    template_name = 'login.html'
+    template_name = 'app_users/login.html'
 
 
     def get_success_url(self):
@@ -35,24 +33,21 @@ class UserLogin(LoginView):
         return super().dispatch(request, *args, **kwargs)
 
 
-
-def user_logout(request):
+def logout_view(request):
     logout(request)
     return redirect('login')
 
 
-
-class UserRegistration(CreateView):
-    template_name = 'registration.html'
+class UserRegistrationView(CreateView):
+    template_name = 'app_users/registration.html'
     model = User
     form_class = UserRegistrationForm
     success_url = reverse_lazy('login')
     
 
-
     def dispatch(self, request, *args, **kwargs):
         if request.method == 'GET' and request.user.is_authenticated:
-            return redirect('home')
+            return redirect('products')
         
         return super().dispatch(request, *args, **kwargs)
 

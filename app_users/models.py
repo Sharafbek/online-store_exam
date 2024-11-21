@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser
 from .managers import UserModelManager, AdminManager, CustomerManager
 
 
-
 class UserModel(AbstractUser):
     email = models.EmailField(max_length=100, unique=True)
     first_name = models.CharField(max_length=100)

@@ -1,25 +1,15 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from .models import Product, Category
 
-def home_page(request):
-    query = request.GET.get('q')
-    search = request.GET.get('search', '')
-
-    products = Product.objects.all()
-
-    if query:
-        products = Product.objects.filter(name__icontains=search)
-
-
-    context={
-        'products' : products,
-        'search' : search,
-    }
-
-    return render(request=request,
-                  template_name='index.html',
-                  context = context)
+class ProductsView(ListView):
+    template_name = 'app_main/products.html'
+    
+    def get_queryset(self):
+        return Product.objects.all
+    
+    context_object_name = 'products'
 
 
 def category_page(request):
@@ -28,6 +18,6 @@ def category_page(request):
         'categories' : categories
     }
     return render(request=request,
-                  template_name='categories.html',
+                  template_name='app_main/categories.html',
                   context=context)
 
