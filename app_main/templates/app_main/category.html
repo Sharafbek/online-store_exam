@@ -5,8 +5,8 @@
 <main class="vh-100 bg-body-tertiary">
 	<!-- Products -->
 	<div class="container m-auto mt-5 row gap-2 justify-content-center">
-		<h1 class="d-flex justify-content-center mb-5">All products</h1>
-		{% for product in products %}
+		<h1 class="d-flex justify-content-center mb-5">All {{category.name}}</h1>
+		{% for product in product_by_category %}
 			<div class="card col-3 p-0">
 				<img
 					class="card-img-top"
@@ -38,24 +38,13 @@
 							</small>
 						</div>
 					</div>
-					{% if not request.user.is_authenticated %}
-						<a
-							href="{% url 'login' %}?next=/detail/{{ product.id }}/"
-							class="mt-2 w-100 d-flex align-items-center justify-content-center font-bold btn btn-warning"
-						>
-							<i class="bi bi-cart-plus mb-1"></i>
-							Add to cart
-						</a>
-					{% else %}
-						<a
-							href="{% url 'cart' %}"
-							class="mt-2 w-100 d-flex align-items-center justify-content-center font-bold btn btn-warning"
-						>
-							<i class="bi bi-cart-plus"></i>
-							Add to cart
-						</a>
-					{% endif %}
-					
+					<a
+						href="{% url 'cart' %}"
+						class="mt-2 w-100 d-flex align-items-center justify-content-center font-bold btn btn-warning"
+					>
+						<i class="bi bi-cart-plus"></i>
+						Add to cart
+					</a>
 				</div>
 			</div>
 		{% endfor %}
