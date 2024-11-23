@@ -59,5 +59,5 @@ class CartView(ListView):
 
     def get_queryset(self):
         return self.request.user.cart_set.all()
-
-
+    
+    
