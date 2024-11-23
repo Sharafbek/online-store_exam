@@ -17,21 +17,32 @@
 					{% csrf_token %}
 
 					{% for field in form %}
-					<div data-mdb-input-init class="form-outline mb-4">
-						<input
-							type="email"
-							id="form1Example13"
-							class="text-black form-control form-control-lg"
-						/>
+					<div data-mdb-input-init class="form__field">
 						<label class="text-black form-label" for="id_{{ field.name }}">{{ field.label }}</label>
+						<input
+							type="{{ field.field.widget.input_type }}"
+							name="{{ field.name }}"
+							id="id_{{ field.name }}"
+							class="text-black form-control form-control-lg {{ field.errors|length|yesno:'is-invalid,' }}"
+							value="{{ field.value|default:'' }}"
+						/>
+						{% if field.errors %}
+							<div class="invalid-feedback">
+								{% for error in field.errors %}
+									<small class='mb-2'>
+										<b class='text-danger'>{{ error }}</b>
+									</small>
+								{% endfor %}
+							</div>
+						{% endif %}
 					</div>
 					{% endfor %}
-					
-
 					<!-- Submit button -->
 					<button
 						type="submit"
-						class="btn btn-primary btn-lg btn-block"
+						data-mdb-button-init
+						data-mdb-ripple-init
+						class="btn btn-primary btn-lg btn-block mt-5"
 					>
 						Sign up
 					</button>

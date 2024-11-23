@@ -6,6 +6,13 @@
     <!-- Categories -->
     <div class="container m-auto mt-3 row gap-2 justify-content-center">
         <h1 class="d-flex justify-content-center mb-3">All categories</h1>
+        {% if not categories %}
+			<h2 class="mt-5">
+				<p class="d-flex justify-content-center align-items-center">
+					<b>Container of categories are empty😎. </b>
+				</p>
+			</h2>
+		{% endif %}
         {% for category in categories %}
             <div class="card col-3 p-0">
                 <img 

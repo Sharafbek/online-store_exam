@@ -1,10 +1,9 @@
-
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 
-
 from . import views
+
 
 urlpatterns = [
 
@@ -16,4 +15,5 @@ urlpatterns = [
     path('account/', views.account_func, name='account'),
 
     
-]
+]   
+
